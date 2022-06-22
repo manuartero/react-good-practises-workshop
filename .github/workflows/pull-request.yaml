@@ -1,0 +1,21 @@
+name: pull request
+
+on: [pull_request]
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+
+    container:
+      image: node:16-alpine
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install depencies (CI)
+        working-directory: 9-clean-code/example-project/simple-linter-ci
+        run: npm ci
+
+      - name: unit tests
+        working-directory: 9-clean-code/example-project/simple-linter-ci
+        run: npm test
